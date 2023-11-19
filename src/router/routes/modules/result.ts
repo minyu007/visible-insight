@@ -8,7 +8,7 @@ const RESULT: AppRouteRecordRaw = {
   component: DEFAULT_LAYOUT,
   meta: {
     locale: 'ESG Ratings',
-    icon: 'icon-check-circle',
+    icon: 'icon-relation',
     requiresAuth: true,
     order: 5,
     hideChildrenInMenu: true,

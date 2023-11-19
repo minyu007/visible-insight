@@ -9,7 +9,7 @@ const PROFILE: AppRouteRecordRaw = {
     locale: 'menu.profile',
     requiresAuth: true,
     icon: 'icon-file',
-    order: 10,
+    order: 13,
   },
   children: [
     {
