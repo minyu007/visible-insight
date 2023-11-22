@@ -1,28 +1,36 @@
 import { DEFAULT_LAYOUT } from '../base';
-import { AppRouteRecordRaw } from '../types';
 
-const PROFILE: AppRouteRecordRaw = {
-  path: '/profile',
-  name: 'profile',
+import { Icon } from '@arco-design/web-vue';
+const IconFont = Icon.addFromIconFontCn({
+  src: '//at.alicdn.com/t/c/font_3959654_asl72fm6sch.js',
+});
+
+
+const FIDELITYBI: AppRouteRecordRaw = {
+  path: '/fidelity',
+  name: 'fidelity',
   component: DEFAULT_LAYOUT,
+  redirect: '/fidelity/bi',
   meta: {
-    locale: 'menu.profile',
+    locale: 'Fidelity BI',
     requiresAuth: true,
-    icon: 'icon-file',
+    icon: 'icon-thunderbolt',
     order: 13,
+    hideChildrenInMenu: true,
   },
   children: [
     {
-      path: 'basic',
-      name: 'Basic',
+      path: 'bi',
+      name: 'bi',
       component: () => import('@/views/profile/basic/index.vue'),
       meta: {
-        locale: 'menu.profile.basic',
+        locale: 'BI',
         requiresAuth: true,
+        activeMenu: 'fidelity',
         roles: ['admin'],
       },
     },
   ],
 };
 
-export default PROFILE;
+export default FIDELITYBI;

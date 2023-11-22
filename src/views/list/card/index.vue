@@ -3,7 +3,8 @@
     <Breadcrumb :items="['Data', 'Data Source']" />
     <a-row :gutter="20" align="stretch">
       <a-col :span="24">
-        <a-card class="general-card" title="Data Source">
+        <a-card class="general-card">
+          <template #title><icon-font type="icon-zuzhiheguanlitubiao-" :size="24" /> Data Source </template>
           <a-row justify="space-between">
             <a-col :span="24">
               <a-tabs :default-active-tab="1" type="rounded">
@@ -39,6 +40,11 @@
   import QualityInspection from './components/quality-inspection.vue';
   import TheService from './components/the-service.vue';
   import RulesPreset from './components/rules-preset.vue';
+  import { Icon } from '@arco-design/web-vue';
+
+  const IconFont = Icon.addFromIconFontCn({
+    src: '//at.alicdn.com/t/c/font_3959654_asl72fm6sch.js',
+  });
 </script>
 
 <script lang="ts">
