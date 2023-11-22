@@ -312,6 +312,7 @@
   const tickers =  ref<any[]>([])
   const chartData =  ref<any[]>([])
   const tickersRaw = ['Hai Tian', 'Qian He', 'Angle', 'Heng Shun']
+  const _tickersRaw = ['Hai Tian', 'Qian He', 'Angle', 'Heng Shun', 'GDP']
 
   // const grossProfitMargin = {
   //   'timeline': ['FY2012','FY2013','FY2014','FY2015','FY2016','FY2017','FY2018','FY2019','FY2020','FY2021','FY2022','FY2023','FY2024','FY2025'],
@@ -347,7 +348,7 @@
   }
 
   const handleChange = (payload: any) => {
-    if(payload.includes('Revenue Growth')) {
+    if(payload.includes('Revenue Growth') && !payload.includes('GDP')) {
       tickers.value = tickersRaw
       chartData.value = tickersRaw.map(v => {
         return {
@@ -357,6 +358,29 @@
           showSymbol: false,
           smooth: true,
           symbolSize: 12,
+          emphasis: {
+            focus: 'series',
+            itemStyle: {
+              borderWidth: 2,
+            },
+          },
+          data: revenueGrowth[v]
+        }
+      })
+    } else if(payload.includes('GDP')) {
+      tickers.value = _tickersRaw
+      chartData.value = _tickersRaw.map(v => {
+
+        return {
+          name: v,
+          type: 'line',
+          stack: 'Total',
+          showSymbol: false,
+          smooth: true,
+          symbolSize: 12,
+          lineStyle: {
+            type: v === 'GDP'? 'dashed': ''
+          },
           emphasis: {
             focus: 'series',
             itemStyle: {
