@@ -8,7 +8,7 @@
       }"
     >
       <template #title>
-        {{ $t('workplace.categoriesPercent') }}
+       Task
       </template>
       <Chart height="310px" :option="chartOption" />
     </a-card>
@@ -26,7 +26,7 @@
     return {
       legend: {
         left: 'center',
-        data: ['纯文本', '图文类', '视频类'],
+        data: ['Model Updates', 'Authoring', 'ESG'],
         bottom: 0,
         icon: 'circle',
         itemWidth: 8,
@@ -48,7 +48,7 @@
             left: 'center',
             top: '40%',
             style: {
-              text: '内容量',
+              text: 'Model Updates',
               textAlign: 'center',
               fill: isDark ? '#ffffffb3' : '#4E5969',
               fontSize: 14,
@@ -84,22 +84,22 @@
           },
           data: [
             {
-              value: [148564],
-              name: '纯文本',
+              value: [50],
+              name: 'Model Updates',
               itemStyle: {
                 color: isDark ? '#3D72F6' : '#249EFF',
               },
             },
             {
-              value: [334271],
-              name: '图文类',
+              value: [26],
+              name: 'Authoring',
               itemStyle: {
                 color: isDark ? '#A079DC' : '#313CA9',
               },
             },
             {
-              value: [445694],
-              name: '视频类',
+              value: [24],
+              name: 'ESG',
               itemStyle: {
                 color: isDark ? '#6CAAF5' : '#21CCFF',
               },
