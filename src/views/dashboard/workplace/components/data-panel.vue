@@ -12,16 +12,15 @@
           />
         </a-avatar>
         <a-statistic
-          :title="$t('workplace.onlineContent')"
-          :value="373.5"
-          :precision="1"
+          title="Model updates"
+          :value="23"
           :value-from="0"
           animation
           show-group-separator
         >
-          <template #suffix>
-            W+ <span class="unit">{{ $t('workplace.pecs') }}</span>
-          </template>
+          <!-- <template #suffix>
+           <span class="unit">{{ $t('workplace.pecs') }}</span>
+          </template> -->
         </a-statistic>
       </a-space>
     </a-grid-item>
@@ -37,15 +36,15 @@
           />
         </a-avatar>
         <a-statistic
-          :title="$t('workplace.putIn')"
-          :value="368"
+          title="Authoring"
+          :value="36"
           :value-from="0"
           animation
           show-group-separator
         >
-          <template #suffix>
+          <!-- <template #suffix>
             <span class="unit">{{ $t('workplace.pecs') }}</span>
-          </template>
+          </template> -->
         </a-statistic>
       </a-space>
     </a-grid-item>
@@ -61,15 +60,15 @@
           />
         </a-avatar>
         <a-statistic
-          :title="$t('workplace.newDay')"
-          :value="8874"
+          title="FIL Ratings"
+          :value="20"
           :value-from="0"
           animation
           show-group-separator
         >
-          <template #suffix>
+          <!-- <template #suffix>
             <span class="unit">{{ $t('workplace.pecs') }}</span>
-          </template>
+          </template> -->
         </a-statistic>
       </a-space>
     </a-grid-item>
