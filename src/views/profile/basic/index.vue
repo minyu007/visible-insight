@@ -150,33 +150,33 @@
   const analystList = ['Zhang, Warren', 'Zhang, Johnson', 'Wang, Jeffrey', 'Tao, Yang', 'Shi, Sophie', 'Liu, Zhenwei', 'Liu, Frank', 'Li, Jackie', 'Bai, Sean'];
   const fundList = ['CSSIT', 'F/HGD', 'F/IBS', 'F/IOD', 'ETFCLD', 'ETTF', 'EUDT', 'F/232'];
   const tickerList = ['603288.SH','603027.SH','600298.SH','600305.SH', '002027.CH','002439.CH','002714.CH','002747.CH','002821.CH','300124.CH','300416.CH','300750.CH','300760.CH','600406.CH','600519.CH','600570.CH','600660.CH','600900.CH','601138.CH','601318.CH','601888.CH','603259.CH','603338.CH']
-  const companyList = ['Hai Tian','Qian He','Angle','Heng Shun', 'FOCUS MEDIA INFORMATION TECHNOLOGY CO LTD A','BEIJING VENUSTECH INC A','MUYUAN FOODSTUFF CO LTD A','ESTUN AUTOMATION CO LTD A','ASYMCHEM LABORATORIES TIANJIN CO LTD A','SHENZHEN INOVANCE TECHNOLOGY CO LTD A','SUZHOU SUSHI TESTING GROUP CO LTD A','CONTEMPORARY AMPEREX TECHNOLOGY CO LTD A','SHENZHEN MINDRAY BIO-MEDICAL ELECTRONICS CO LTD A','NARI TECH DEVELOPMENT LTD CO A','KWEICHOW MOUTAI CO LTD A','HUNDSUN TECHNOLOGIES INC A','FUYAO GLASS INDUSTRY GROUP CO LTD A','CHINA YANGTZE POWER CO LTD A','FOXCONN INDUSTRIAL INTERNET CO LTD A','PING AN INSURANCE CO LTD A','CHINA TOURISM GROUP DUTY FREE CORP LTD A','WUXI APPTEC CO LTD A','ZHEJIANG DINGLI MACHINERY CO LTD A'];
+  const companyList = ['FOSHAN HAITIAN FLAVORING & FOOD CO LTD A','QIANHE CONDIMENT AND FOOD CO LTD A','ANGEL YEAST CO LTD A','JIANGSU HENGSHUN VGR IND CO A', 'FOCUS MEDIA INFORMATION TECHNOLOGY CO LTD A','BEIJING VENUSTECH INC A','MUYUAN FOODSTUFF CO LTD A','ESTUN AUTOMATION CO LTD A','ASYMCHEM LABORATORIES TIANJIN CO LTD A','SHENZHEN INOVANCE TECHNOLOGY CO LTD A','SUZHOU SUSHI TESTING GROUP CO LTD A','CONTEMPORARY AMPEREX TECHNOLOGY CO LTD A','SHENZHEN MINDRAY BIO-MEDICAL ELECTRONICS CO LTD A','NARI TECH DEVELOPMENT LTD CO A','KWEICHOW MOUTAI CO LTD A','HUNDSUN TECHNOLOGIES INC A','FUYAO GLASS INDUSTRY GROUP CO LTD A','CHINA YANGTZE POWER CO LTD A','FOXCONN INDUSTRIAL INTERNET CO LTD A','PING AN INSURANCE CO LTD A','CHINA TOURISM GROUP DUTY FREE CORP LTD A','WUXI APPTEC CO LTD A','ZHEJIANG DINGLI MACHINERY CO LTD A'];
 
   const rawData = [{
     key: 0,
     ticker: '603288.SH',
-    companyName: 'Hai Tian',
+    companyName: 'FOSHAN HAITIAN FLAVORING & FOOD CO LTD A',
     isSelected: false,
     analyst: 'Zhang, Johnson',
     fund:'CSSIT',
   },{
     key: 1,
     ticker: '603027.SH',
-    companyName: 'Qian He',
+    companyName: 'QIANHE CONDIMENT AND FOOD CO LTD A',
     isSelected: false,
     analyst: 'Zhang, Johnson',
     fund:'CSSIT',
   },{
     key: 2,
     ticker: '600298.SH',
-    companyName: 'Angle',
+    companyName: 'ANGEL YEAST CO LTD A',
     isSelected: false,
     analyst: 'Zhang, Johnson',
     fund:'CSSIT',
   },{
     key: 3,
     ticker: '600305.SH',
-    companyName: 'Heng Shun',
+    companyName: 'JIANGSU HENGSHUN VGR IND CO A',
     isSelected: false,
     analyst: 'Zhang, Johnson',
     fund:'CSSIT',
@@ -302,17 +302,17 @@
 
   const timeseries = ref<any[]>(['FY2012','FY2013','FY2014','FY2015','FY2016','FY2017','FY2018','FY2019','FY2020','FY2021','FY2022','FY2023','FY2024','FY2025'].map(v => parseInt(v.replace('FY', ''))));
   const revenueGrowth = {
-    'Hai Tian': ['16.1%','18.8%','16.8%','15.0%','10.3%','17.1%','16.8%','16.2%','15.1%','9.7%','2.4%','4.4%','7.4%','12.4%'].map(v => Math.floor(parseFloat(v.replace('%', ''))*100)/10000),
-    'Qian He': ['9.3%','11.5%','6.2%','-4.2%','23.6%','23.0%','12.4%','27.2%','25.0%','13.7%','26.6%','24.6%','21.6%','16.6%'].map(v => Math.floor(parseFloat(v.replace('%', ''))*100)/10000),
-    'Angle': ['8.3%','15.0%','17.1%','15.3%','15.4%','18.8%','15.8%','14.5%','16.7%','19.5%','20.3%','18.3%','15.3%','20.3%'].map(v => Math.floor(parseFloat(v.replace('%', ''))*100)/10000),
-    'Heng Shun':['12.7%','-3.1%','8.7%','8.1%','10.9%','6.5%','9.9%','7.5%','9.9%','-6.4%','13.0%','15.0%','12.0%','17.0%'].map(v => Math.floor(parseFloat(v.replace('%', ''))*100)/10000),
+    'FOSHAN HAITIAN FLAVORING & FOOD CO LTD A': ['16.1%','18.8%','16.8%','15.0%','10.3%','17.1%','16.8%','16.2%','15.1%','9.7%','2.4%','4.4%','7.4%','12.4%'].map(v => Math.floor(parseFloat(v.replace('%', ''))*100)/10000),
+    'QIANHE CONDIMENT AND FOOD CO LTD A': ['9.3%','11.5%','6.2%','-4.2%','23.6%','23.0%','12.4%','27.2%','25.0%','13.7%','26.6%','24.6%','21.6%','16.6%'].map(v => Math.floor(parseFloat(v.replace('%', ''))*100)/10000),
+    'ANGEL YEAST CO LTD A': ['8.3%','15.0%','17.1%','15.3%','15.4%','18.8%','15.8%','14.5%','16.7%','19.5%','20.3%','18.3%','15.3%','20.3%'].map(v => Math.floor(parseFloat(v.replace('%', ''))*100)/10000),
+    'JIANGSU HENGSHUN VGR IND CO A':['12.7%','-3.1%','8.7%','8.1%','10.9%','6.5%','9.9%','7.5%','9.9%','-6.4%','13.0%','15.0%','12.0%','17.0%'].map(v => Math.floor(parseFloat(v.replace('%', ''))*100)/10000),
     'GDP': ['7.9%','7.8%','7.4%','7.0%','6.8%','6.9%','6.7%','6.0%','2.2%','8.4%','3.0%','4.5%','5.3%','6.0%'].map(v => Math.floor(parseFloat(v.replace('%', ''))*100)/10000)
   }
 
   const tickers =  ref<any[]>([])
   const chartData =  ref<any[]>([])
-  const tickersRaw = ['Hai Tian', 'Qian He', 'Angle', 'Heng Shun']
-  const _tickersRaw = ['Hai Tian', 'Qian He', 'Angle', 'Heng Shun', 'GDP']
+  const tickersRaw = ['FOSHAN HAITIAN FLAVORING & FOOD CO LTD A', 'QIANHE CONDIMENT AND FOOD CO LTD A', 'ANGEL YEAST CO LTD A', 'JIANGSU HENGSHUN VGR IND CO A']
+  const _tickersRaw = ['FOSHAN HAITIAN FLAVORING & FOOD CO LTD A', 'QIANHE CONDIMENT AND FOOD CO LTD A', 'ANGEL YEAST CO LTD A', 'JIANGSU HENGSHUN VGR IND CO A', 'GDP']
 
   // const grossProfitMargin = {
   //   'timeline': ['FY2012','FY2013','FY2014','FY2015','FY2016','FY2017','FY2018','FY2019','FY2020','FY2021','FY2022','FY2023','FY2024','FY2025'],

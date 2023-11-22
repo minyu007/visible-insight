@@ -1,9 +1,9 @@
 import { DEFAULT_LAYOUT } from '../base';
 
-import { Icon } from '@arco-design/web-vue';
-const IconFont = Icon.addFromIconFontCn({
-  src: '//at.alicdn.com/t/c/font_3959654_asl72fm6sch.js',
-});
+// import { Icon } from '@arco-design/web-vue';
+// const IconFont = Icon.addFromIconFontCn({
+//   src: '//at.alicdn.com/t/c/font_3959654_asl72fm6sch.js',
+// });
 
 
 const FIDELITYBI: AppRouteRecordRaw = {
