@@ -1,731 +1,338 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['Authoring', 'Authoring-edit']" />
-    <a-spin :loading="loading" style="width: 100%">
-      <a-card class="general-card">
-        <div style="margin-left: 20%;font-size: 15px;color: black;height: 30px;padding-top: 20px;margin-bottom: 20px">
-          ESG Rating List{{actives}}
-        </div>
-        <div class="cen" style="display:flex;flex-direction: row;width: 100%;">
-          <div style="width: 18%;height: 110%;margin-right: 2%;margin-top: -3%">
-            <a-table style="height: 100%;width: 100%;" :columns="columns4" :data="data4" :pagination="false" />
-          </div>
-          <div class="wrapper">
-            <a-table style="height: 300px;width: 100%" :columns="columns" :data="data" :scroll="scroll"
-                     :loading="bool" :row-class="activeRowClass"
-                     @row-click="cl"
-            />
-            <div class="cenbom">
-              <!--            <template #title></template>  <template #title>ESG Rating Preview</template>-->
-              <p style="position: absolute;top: -60px;font-size: 15px;color: black">ESG Engagement</p>
-              <p style="position: absolute;top: -60px;font-size: 15px;left: 52%;color: black">ESG Rating Preview</p>
+    <Breadcrumb :items="['menu.result', 'menu.result.success']" />
 
-              <div style="width: 50%;height: 350px;display: flex;">
+    <div class="wrapper">
 
-                <a-table style="width: 99%;" :columns="columns2" :data="data2" :expandable="expandable"
-                         :scroll="scroll1" :loading="bool2" />
-              </div>
-              <div style="width: 50%;height: 350px;display: flex;flex-direction: column">
-                <div style="height: 10%;margin-bottom: 30px;margin-left: 20px">
-                  <a-space>
-                    <a-popover title="Overall">
-                      <a-button @click="changetable">Overall</a-button>
-<!--                      <template #content>-->
-<!--                        <p>Here is the text content</p>-->
-<!--                        <p>Here is the text content</p>-->
-<!--                      </template>-->
-                    </a-popover>
-                    <a-popover title="Environmental" >
-                      <a-button @click="changetable1">Environmental</a-button>
-<!--                      <template #content>-->
-<!--                        <p>Here is the text content</p>-->
-<!--                        <p>Here is the text content</p>-->
-<!--                      </template>-->
-                    </a-popover>
-                    <a-popover title="Social">
-                      <a-button @click="changetable2">Social</a-button>
-<!--                      <template #content>-->
-<!--                        <p>Here is the text content</p>-->
-<!--                        <p>Here is the text content</p>-->
-<!--                      </template>-->
-                    </a-popover>
-                    <a-popover title="Governance">
-                      <a-button @click="changetable3">Governance</a-button>
-<!--                      <template #content>-->
-<!--                        <p>Here is the text content</p>-->
-<!--                        <p>Here is the text content</p>-->
-<!--                      </template>-->
-                    </a-popover>
+      <div>
+        <a-space direction="vertical" size="large">
+          <!--          <a-input-search :style="{width:'320px'}" placeholder="Please enter something" button-text="Search" search-button/>-->
+          <a-input-search :style="{width:'520px'}" placeholder="Ticker/company name" search-button>
+            <template #button-icon>
+              <icon-search />
+            </template>
+            <template #button-default>
+              Search
+            </template>
+          </a-input-search>
+        </a-space>
+      </div>
+
+      <div style="margin-top: 30px">
+
+
+        <div :style="{ marginTop: '20px' }">
+          <a-radio-group>
+            <template v-for="item in list" :key="item">
+              <a-radio :value="item">
+                <template #radio="{ checked }">
+                  <a-space
+                    align="start"
+                    class="custom-radio-card"
+                    :class="{ 'custom-radio-card-checked': checked }"
+                  >
+                    <div className="custom-radio-card-mask">
+                      <div className="custom-radio-card-mask-dot" />
+                    </div>
+                    <div>
+                      <div className="custom-radio-card-title">
+                        {{ item }}
+                      </div>
+                      <a-typography-text type="secondary">
+
+                      </a-typography-text>
+                    </div>
                   </a-space>
-                </div>
-                <a-table style="width: 99%;margin-left: 20px" :columns="columns3" :data="data3" :loading="bool2"
-                         :scroll="scroll2" :bordered="{headerCell:true}" v-if="b1" />
-                <a-table style="width: 99%;margin-left: 20px" :columns="columns31" :data="data31" :loading="bool2"
-                         :scroll="scroll2" :bordered="{headerCell:true}" v-if="b2" />
-                <a-table style="width: 99%;margin-left: 20px" :columns="columns32" :data="data32" :loading="bool2"
-                         :scroll="scroll2" :bordered="{headerCell:true}" v-if="b3" />
-                <a-table style="width: 99%;margin-left: 20px" :columns="columns33" :data="data33" :loading="bool2"
-                         :scroll="scroll2" :bordered="{headerCell:true}" v-if="b4" />
-              </div>
-            </div>
-          </div>
+                </template>
+              </a-radio>
+            </template>
+          </a-radio-group>
+
         </div>
-      </a-card>
-    </a-spin>
+        <!--        rating note-->
+        <!--        general note-->
+        <!--        predetermined note-->
+
+        <!--        monthly data update-->
+        <!--        earnings result update-->
+        <div style="display:flex;flex-direction: row">
+          <a-space direction="vertical" size="large">
+          <a-select :style="{width:'220px',marginTop: '20px'}" placeholder="Please select ...">
+            <a-option>monthly data update</a-option>
+            <a-option>earnings result update</a-option>
+          </a-select>
+          </a-space>
+          <a-button @click="cl" style="width: 100px;margin-top: 20px;margin-left: 600px" type="primary">Crate</a-button>
+          <a-button style="width: 100px;margin-top: 20px;margin-left: 20px" type="outline">Preview</a-button>
+
+        </div>
+        <p style="font-weight: bold;font-size: 17px;position: relative;top: 5px">KEY TAKEAWAY:</p>
+        <textarea style="width: 100%;height: 100px"></textarea>
+        <p style="font-weight: bold;font-size: 17px;position: relative;top: 5px">PM ACTION:</p>
+        <textarea style="width: 100%"></textarea>
+        <p style="font-size: 16px;font-weight: bold;">Analysis & Outlook:</p>
+        <div v-if="act" style="width: 100%;height: 150px;border: 1px black solid;text-align: center">
+          <a-spin :loading="loading" tip="This may take a while..." style="width: 400px;margin-top: 70px">
+<!--            <a-card title="Arco Card">-->
+<!--             -->
+<!--            </a-card>-->
+          </a-spin>
+        </div>
+        <div v-if="!act" style="width: 100%;border: 1px black solid">
+          <div style="display: flex;flex-direction: row"><div style="height: 5px;width: 5px;border: 1px black solid;border-radius: 10px;margin-top: 20px;margin-left: 10px;margin-right: 10px"></div><p style="color:red;font-size: 14px;font-weight: bold">Property sales</p><p style="font-size: 14px;color: black;font-weight: bold">:-8.1% YoY in Oct,increased from -13.6% YoY in Sep.GFA sold -11.0% YoY in Oct,slighty decreased from -10.1% YoY in Sep.</p></div>
+          <div style="display: flex;flex-direction: row"><div style="height: 5px;width: 5px;border: 1px black solid;background: black;margin-top: 20px;margin-left: 50px;margin-right: 10px"></div><p style="color:black;;font-size: 14px;font-weight: bold">Residential property(home)sales:-8.9% YoY in Oct,increased from -14.2% YoY in Sep.GFA sold -12.0% YoY in Oct,slighty decreased from -11.6% YoY in Sep.</p></div>
+          <div style="display: flex;flex-direction: row"><div style="height: 5px;width: 5px;border: 1px black solid;border-radius: 10px;margin-top: 20px;margin-left: 10px;margin-right: 10px"></div><p style="color:red;font-size: 14px;font-weight: bold">New starts</p><p style="font-size: 14px;color: black;font-weight: bold">:-21.1% in Oct,decreased from -14.6% in Sep.</p></div>
+          <div style="display: flex;flex-direction: row"><div style="height: 5px;width: 5px;border: 1px black solid;border-radius: 10px;margin-top: 20px;margin-left: 10px;margin-right: 10px"></div><p style="color:red;font-size: 14px;font-weight: bold">New completions</p><p style="font-size: 14px;color: black;font-weight: bold">:13.3% YoY in Oct,decreased from -13.6% YoY in Sep.</p></div>
+          <div style="display: flex;flex-direction: row"><div style="height: 5px;width: 5px;border: 1px black solid;border-radius: 10px;margin-top: 20px;margin-left: 10px;margin-right: 10px"></div><p style="color:red;font-size: 14px;font-weight: bold">Property FAI</p><p style="font-size: 14px;color: black;font-weight: bold">:-11.3% YoY in Oct,flatted from -11.3% YoY in Sep.</p></div>
+          <div style="display: flex;flex-direction: row"><div style="height: 5px;width: 5px;border: 1px black solid;border-radius: 10px;margin-top: 20px;margin-left: 10px;margin-right: 10px"></div><p style="color:red;font-size: 14px;font-weight: bold">Home price</p><p style="font-size: 14px;color: black;font-weight: bold">:In Oct,among the 70 cities,primary home price increased MoM in 11 cities(vs in 15 Sep),secondary home increased MoM in cities(vs 4 in Sep).</p></div>
+          <div style="display: flex;flex-direction: row"><div style="height: 5px;width: 5px;border: 1px black solid;background: black;margin-top: 20px;margin-left: 50px;margin-right: 10px"></div><p style="color:red;font-size: 14px;font-weight: bold">Tier-1 cities</p><p style="font-size: 14px;color: black;font-weight: bold">:primary/secondary home price decreased by -0.3%/-0.8% MoM,decreased from 0.00%/0.2% in Sep</p></div>
+          <div style="display: flex;flex-direction: row"><div style="height: 5px;width: 5px;border: 1px black solid;background: black;margin-top: 20px;margin-left: 50px;margin-right: 10px"></div><p style="color:red;font-size: 14px;font-weight: bold">Tier-2 cities</p><p style="font-size: 14px;color: black;font-weight: bold">:primary/secondary home price decreased by -0.2%/-0.5% MoM,decreased from 0.3%/0.5% in Sep</p></div>
+          <div style="display: flex;flex-direction: row"><div style="height: 5px;width: 5px;border: 1px black solid;background: black;margin-top: 20px;margin-left: 50px;margin-right: 10px"></div><p style="color:red;font-size: 14px;font-weight: bold">Tier-3 cities</p><p style="font-size: 14px;color: black;font-weight: bold">:primary/secondary home price decreased by -0.5%/-0.6% MoM,decreased from 0.3%/0.5% in Sep</p></div>
+
+        </div>
+
+
+      </div>
+      <!--      <div class="header">-->
+      <!--        <div class="eq">-->
+      <!--          <p style="margin-left: 30px;color: white;font-size: 25px;font-weight: bold">Equity</p>-->
+      <!--        </div>-->
+      <!--        <p style="margin-left: 30px;margin-top: 70px;color: white;font-size: 16px">2 | TSENG,JONATHAN | 03 Nov 2023 | ESG: B(E:2.55,S:2.23,G:2.35)</p>-->
+      <!--        <p style="margin-left: 30px;color: white;font-size: 16px">Owned / Allowed: 0.05%/0.99%</p>-->
+      <!--        <p style="margin-left: 30px;color: white;font-size: 16px">Price / Mkt Caps:Usd 189.68 / USD 2,950,202m</p>-->
+      <!--        <p style="position: absolute;top: 5px;right: 5%;font-weight: bold;color: white;font-size: 25px">APPLE INC(AAPL.US)</p>-->
+      <!--        <p style="position: absolute;top: 27%;right: 5%;font-size: 16px;color:white;">Technology Hardware & Equipment | UNITED</p>-->
+      <!--        <p style="position: absolute;top: 44%;right: 5%;font-size: 16px;color:white;">LI,JACKIE +8641139457059</p>-->
+      <!--        <p style="position: absolute;top: 62%;right: 5%;font-size: 16px;color:white;">18 November 2023, 15:26(GMT+8)</p>-->
+      <!--      </div>-->
+      <!--      <div class="center">-->
+      <!--        <p  @click="dbc" style="position: relative;margin-left: 30px;font-size: 25px" :ref="el" class="t"></p>-->
+      <!--        <textarea style="margin-left: 30px;position: absolute;top: 25px;width: 80%" v-model="t1" v-if="!b1" @keyup.ctrl.enter="sub1"></textarea>-->
+
+      <!--        <div STYLE="background: aquamarine;width: 96%;position: relative">-->
+      <!--          <p style="font-weight: bold;font-size: 17px;margin-left: 30px;position: relative;top: 5px">KEY TAKEAWAY:</p>-->
+      <!--          <p :ref="el2" @dblclick="dbc1" style="position: relative;z-index: 10;left: 18%;top: -30px;font-size: 14px">ddd</p>-->
+      <!--          <input style="position: relative;z-index: 10;left: 18%;top: -30px;" v-if="!b2" @keyup.enter="sub2" v-model="t2">-->
+      <!--        </div>-->
+
+      <!--        <div STYLE="background: aquamarine;width: 96%;position: relative">-->
+      <!--          <p style="font-weight: bold;font-size: 17px;margin-left: 30px;position: relative;top: 5px">PM ACTION:</p>-->
+      <!--          <p :ref="el3" @dblclick="dbc2" style="position: relative;z-index: 10;left: 18%;top: -30px;font-size: 14px">sss</p>-->
+      <!--          <input style="position: relative;z-index: 10;left: 18%;top: -30px;" v-if="!b3" @keyup.enter="sub3" v-model="t3">-->
+      <!--        </div>-->
+      <!--        <p style="font-size: 16px;font-weight: bold;margin-left: 30px">Analysis & Outlook:</p>-->
+      <!--        <div style="margin-left: 30px;height: 10px;width: 10px;border-left: brown 5px solid;border-top: white 5px solid;border-bottom: white 5px solid"></div> <p></p>-->
+      <!--        <p :ref="el4" @dblclick="dbc3" style="position: relative;top: -28px;left: 60px;font-size: 14px">h</p>-->
+      <!--        <input v-if="!b4" @keyup.enter="sub4" v-model="t4" style="position: relative;top: -52px;left: 60px;">-->
+      <!--      </div>-->
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, onMounted } from "vue";
-let bool = ref(true);
-let bool2 =ref(true)
-onMounted(function() {
-  setTimeout(() => {
-    bool.value = false;
-    bool2.value=false
-  }, 1500);
-});
-const scroll = {
-  x: 1500,
-  y: 200
-};
-const scroll1 = {
-  x: 1000,
-  y: 250
-};
-const scroll2 = {
-  x: 1000,
-  y: 150
-};
-let b1 = ref(true), b2 = ref(false), b3 = ref(false), b4 = ref(false);
-let changetable = function() {
-  b1.value = true;
-  b2.value = false;
-  b3.value = false;
-  b4.value = false;
-};
-let changetable2 = function() {
-  b1.value = false;
-  b2.value = false;
-  b3.value = true;
-  b4.value = false;
-};
-let changetable3 = function() {
-  b1.value = false;
-  b2.value = false;
-  b3.value = false;
-  b4.value = true;
-
-};
-let changetable1 = function() {
-  b1.value = false;
-  b2.value = true;
-  b3.value = false;
-  b4.value = false;
-
-};
-let actives = ref('')
-let activeRowClass =  (record) => {
-  // console.log(record)
-  return record.key === actives.value ? 'activeRowLight' : '';
-};
-
-const cl = (record) => {
-  // console.log(record.key)
-  actives.value=record.key
-  bool2.value=true
-  setTimeout(() => {
-    bool2.value = false;
-  }, 1500);
+import { onMounted, reactive, ref } from "vue";
+let val = ref('update '),loading = ref(false)
+let cheaked = ref(true);
+let act = ref(true);
+let list = reactive(["Rating note", "General note", "Predetermined note"]);
+function cl(){
+  loading.value=true;
+  setTimeout(function(){act.value = false},1000)
 }
-//////
-const columns = [
-  {
-    title: "BBC Ticker",
-    dataIndex: "bbc Ticker"
-  },
-  {
-    title: "ISIN",
-    dataIndex: "isin"
-  },
-  {
-    title: "CUSIP",
-    dataIndex: "cusip"
-  },
-  {
-    title: "Debt Ticker",
-    dataIndex: "debt ticker"
-  },
-  {
-    title: "Issure Name",
-    dataIndex: "issure name"
-  },
-  {
-    title: "Fi Assigned Analyst",
-    dataIndex: "fi assigned analyst"
-  },
-  {
-    title: "Eq Assigned Analyst",
-    dataIndex: "eq assigned analyst"
-  },
-  {
-    title: "Holding Fund Name",
-    dataIndex: "holding fund name"
-  },
-  {
-    title: "MSCI ESG Rating",
-    dataIndex: "msci esg rating"
-  }
+function sle(v){
+  val.value=v
+}
 
-];
-const data = reactive([{
-  key: "1",
-  "bbc Ticker": "FOUR.LN",
-  isin: "GB0006640972",
-  cusip: "087998",
-  "debt ticker": "       ",
-  "issure name": "4IMPRINT GROUP PLC",
-  "fi assigned analyst": "     ",
-  "eq assigned analyst": "TURNER,BEN",
-  "holding fund name": "BUMA-UI-FDS | FIDELITY",
-  "msci esg rating": "AA",
-  "msci derived esg rating": "     "
-}, {
-  key: "2",
-  "bbc Ticker": "MMM.US",
-  isin: "US88579Y1010",
-  cusip: "88579Y",
-  "debt ticker": "MMM CORP",
-  "issure name": "3M CO",
-  "fi assigned analyst": "MISSAR,BOBBY",
-  "eq assigned analyst": "PAREKH,SHREEJI",
-  "holding fund name": "FID GLBL CONC EQTY FND D...",
-  "msci esg rating": "AAA",
-  "msci derived esg rating": "     "
-}, {
-  key: "3",
-  "bbc Ticker": "688536.CH",
-  isin: "CNE1000042T2",
-  cusip: "B19229",
-  "debt ticker": "       ",
-  "issure name": "3PEAK INC",
-  "fi assigned analyst": "     ",
-  "eq assigned analyst": "WANG,VIVIAN MZ",
-  "holding fund name": "      ",
-  "msci esg rating": "CCC",
-  "msci derived esg rating": "     "
-}, {
-  key: "4",
-  "bbc Ticker": "RRRP3.BZ",
-  isin: "BRRRRPACNOR5",
-  cusip: "B25862",
-  "debt ticker": "       ",
-  "issure name": "3R PETROLEUM OLEO E GA...",
-  "fi assigned analyst": "     ",
-  "eq assigned analyst": "STAFFORD,LAURA",
-  "holding fund name": "FID FDS SUST RE EM EQ PL,FI...",
-  "msci esg rating": "BBB",
-  "msci derived esg rating": "     "
-}, {
-  key: "5",
-  "bbc Ticker": "1530.HK",
-  isin: "KYG8875G1029",
-  cusip: "8875Y",
-  "debt ticker": "          ",
-  "issure name": "3SBIO INC",
-  "fi assigned analyst": "     ",
-  "eq assigned analyst": "LANG,YUANLIN",
-  "holding fund name": "      ",
-  "msci esg rating": "AA",
-  "msci derived esg rating": "     "
-}]);
-///
-const expandable = reactive({
-  title: "Expand",
-  width: 80,
-  expandedRowRender: (record) => {
-    if (record.key === "1") {
-      return `EXECUTIVE REMUNERATION----- Responed to remuneration consultation letter. The main change they are proposing for the upcoming three-year
-              period is the possibility of introducing an LTIP`;
-    } else if (record.key === "2") {
-      return `BUSINESS ETHICS---- We encouraged companies to manage social impacts on communities arising from the cost-of-living crisis in a responsible manner`;
-    } else if (record.key === "3") {
-      return;
-    } else if (record.key === "4") {
-      return;
-    }
-  }
-});
-const columns2 = [
-  {
-    title: "Date",
-    dataIndex: "date"
-  },
-  {
-    title: "Analyst",
-    dataIndex: "analyst"
-  },
-  {
-    title: "Objective",
-    dataIndex: "objective"
-  },
-  {
-    title: "Engagement Type",
-    dataIndex: "engagement type"
-  },
-  {
-    title: "Engagement Mode",
-    dataIndex: "engagement mode"
-  },
-  {
-    title: "Company Rpresentative",
-    dataIndex: "company rpresentative"
-  },
-  {
-    title: "Engagement Topic Area(s)",
-    dataIndex: "engagement topic area(s)"
-  }
-];
-
-const data2 = reactive([
-  {
-    key: "1",
-    date: "10 Oct 2023",
-    analyst: "ROBERTS FIL,MATTHEW",
-    objective: "Policy development",
-    "engagement type": "reactive",
-    "engagement mode": "Written Correspondence",
-    "company representative": "Remuneration Committee chair...",
-    "engagement topic area(s)": "EXECUTIVE REMUNERATION"
-  }, {
-    key: "2",
-    date: "22 Nov 2022",
-    analyst: "ROBERTS FIL,MATTHEW",
-    objective: "Improved performance",
-    "engagement type": "Thematic",
-    "engagement mode": "Written Correspondence",
-    "company representative": "Chairman",
-    "engagement topic area(s)": "BUSINESS ETHICS,CLIMATE CHANGE,EXECUTIVE REMUNERATION"
-  }, {
-    key: "3",
-    date: "26 Nov 2020",
-    analyst: "RoMANO,LUCA",
-    objective: "N/A",
-    "engagement type": "Proactive",
-    "engagement mode": "Conference Call",
-    "company representative": "Chairman",
-    "engagement topic area(s)": "EXECUTIVE REMUNERATION"
-  }, {
-    key: "4",
-    date: "09 Jul 2020",
-    analyst: "ROBERTS FIL,MATTHEW",
-    objective: "N/A",
-    "engagement type": "proactive",
-    "engagement mode": "Written Correspondence",
-    "company representative": "Investor Relations",
-    "engagement topic area(s)": "EXECUTIVE REMUNERATION"
-  }
-]);
 //
-const columns3 = reactive([{
-  title: "Metrics & Data Reference",
-  dataIndex: "mdr",
-  // fixed: "left",
-  width: 140
-},
-  {
-    title: "Sub-Industry Average",
-    dataIndex: "sia",
-    // fixed: "left",
-    width: 140
-  }, {
-    title: "MSCI Average",
-    dataIndex: "ma",
-    // fixed: "right",
-    width: 120
-  },
-  {
-    title: "3R PETROLEUM OLEO GAS SA",
-    children: [{
-      title: "MSCI Score",
-      width: 100,
-      dataIndex: "ms"
-    }, {
-      title: "ESG Score",
-      width: 100,
-      dataIndex: "es"
-    }, {
-      title: "Comment",
-      dataIndex: "com",
-      // fixed: "right",
-      width: 120
-    }
-    ]
-  }]);
-const data3 = reactive([{
-  key: "1",
-  mdr: "Based on your analysis of the company's sus... ",
-  sia: "Improving",
-  ma: "",
-  ms: "",
-  es: "Stable",
-  com: "34"
-}, {
-  key: "2",
-  mdr: "Based on your analysis of the company's man... ",
-  sia: "C",
-  ma: "B",
-  ms: "BBB",
-  es: "D",
-  com: "34"
-},
-  {
-    key: "3",
-    mdr: "Equity - How have you factored in ESG risk in your fundamental valuations for the company/issure",
-    sia: "",
-    ma: "",
-    ms: "",
-    es: "",
-    com: "34"
-  },
-  {
-    key: "4",
-    mdr: "Fixed Income/PCT - How have you factored in ESG risk in your fundamental/relative value rating for the company/issuer",
-    sia: "",
-    ma: "",
-    ms: "",
-    es: "",
-    com: "34"
-  }
-]);
-//
-const columns31 = reactive([
-  {
-    title: "Metrics & Data Reference",
-    dataIndex: "mdr",
-    // fixed: "left",
-    width: 140
-  },{
-    title: "Weight",
-    dataIndex: "w",
-    // fixed: "right",
-    width: 120
-  },
-  {
-    title: "Sub-Industry Average",
-    dataIndex: "sia",
-    // fixed: "left",
-    width: 140
-  },
-  {
-    title: "3R PETROLEUM OLEO GAS SA",
-    children: [{
-      title: "Value",
-      width: 100,
-      dataIndex: "v"
-    }, {
-      title: "Score",
-      width: 100,
-      dataIndex: "s"
-    }, {
-      title: "Comment",
-      dataIndex: "com",
-      // fixed: "right",
-      width: 120
-    }
-    ]
-  }
-]);
-const data31 = reactive([{
-  key: "1",
-  mdr: "How does the company manage the water usage from its operations",
-  sia: "1.48",
-  w: "5%",
-  s: "0",
-  v: "",
-  com: "No disclosure"
-}, {
-  key: "2",
-  mdr: "How does the company manage the GHG emissions from its operations?",
-  sia: "1.46",
-  w: "55%",
-  s: "0.5",
-  v: "",
-  com: "The company has a project in pace to..."
-},
-  {
-    key: "3",
-    mdr: "How does the company manage the toxic emissions from its operations?",
-    sia: "1.24",
-    w: "10%",
-    s: "0",
-    v: "",
-    com: "No disclosure"
-  },
-  {
-    key: "4",
-    mdr: "How does the company manage the negative impact associated with sea use in regards to biodiversity",
-    sia: "1.47",
-    w: "5%",
-    s: "0",
-    v: "",
-    com: "No disclosure"
-  }
-]);
-//
-const columns32 = reactive([
-  {
-    title: "Metrics & Data Reference",
-    dataIndex: "mdr",
-    // fixed: "left",
-    width: 140
-  },{
-    title: "Weight",
-    dataIndex: "w",
-    // fixed: "right",
-    width: 120
-  },
-  {
-    title: "Sub-Industry Average",
-    dataIndex: "sia",
-    // fixed: "left",
-    width: 140
-  },
-  {
-    title: "3R PETROLEUM OLEO GAS SA",
-    children: [{
-      title: "Value",
-      width: 100,
-      dataIndex: "v"
-    }, {
-      title: "Score",
-      width: 100,
-      dataIndex: "s"
-    }, {
-      title: "Comment",
-      dataIndex: "com",
-      // fixed: "right",
-      width: 120
-    }
-    ]
-  }
-]);
-const data32 = reactive([{
-  key: "4",
-  mdr: "How does the company manage the negative impact associated with sea use in regards to biodiversity",
-  sia: "1.47",
-  w: "35%",
-  s: "0",
-  v: "",
-  com: "No disclosure"
-}, {
-  key: "2",
-  mdr: "How does the company manage the GHG emissions from its operations?",
-  sia: "1.46",
-  w: "55%",
-  s: "0.5",
-  v: "",
-  com: "The company has a project in pace to..."
-},
-  {
-    key: "3",
-    mdr: "How does the company manage the toxic emissions from its operations?",
-    sia: "1.24",
-    w: "10%",
-    s: "0",
-    v: "",
-    com: "No disclosure"
-  },
-  {
-    key: "4",
-    mdr: "How does the company manage the negative impact associated with sea use in regards to biodiversity",
-    sia: "1.47",
-    w: "5%",
-    s: "0",
-    v: "",
-    com: "No disclosure"
-  }
-]);
-//
-const columns33 = reactive([
-  {
-    title: "Metrics & Data Reference",
-    dataIndex: "mdr",
-    // fixed: "left",
-    width: 140
-  },
-  {
-    title: "Sub-Industry Average",
-    dataIndex: "sia",
-    // fixed: "left",
-    width: 140
-  },
-  {
-    title: "3R PETROLEUM OLEO GAS SA",
-    children: [{
-      title: "Value",
-      width: 100,
-      dataIndex: "v"
-    }, {
-      title: "Score",
-      width: 100,
-      dataIndex: "s"
-    },{
-      title: "Weight",
-      dataIndex: "w",
-      // fixed: "right",
-      width: 120
-    },{
-      title: "Comment",
-      dataIndex: "com",
-      // fixed: "right",
-      width: 120
-    }
-    ]
-  }
-]);
-const data33 = reactive([{
-  key: "1",
-  mdr: "Management quality score",
-  sia: "1.68",
-  w: "20%",
-  s: "1",
-  v: "",
-  com: "None"
-}, {
-  key: "2",
-  mdr: "Board Effectiveness",
-  sia: "1.35",
-  w: "10%",
-  s: "1",
-  v: "",
-  com: "No issues"
-},
-  {
-    key: "3",
-    mdr: "How does the company manage the toxic emissions from its operations?",
-    sia: "1.24",
-    w: "10%",
-    s: "0",
-    v: "",
-    com: "No disclosure"
-  },
-  {
-    key: "4",
-    mdr: "How does the company manage the negative impact associated with sea use in regards to biodiversity",
-    sia: "1.47",
-    w: "5%",
-    s: "0",
-    v: "",
-    com: "No disclosure"
-  }
-]);
-
-
-const columns4 = [
-  {
-    title: "ESG Function",
-    dataIndex: "esg"
-  }
-];
-const data4 = reactive([
-  {
-    key: "1",
-    esg: "Time Frame"
-  },
-  {
-    key: "2",
-    esg: "Holdings Time Frame"
-  },
-  {
-    key: "3",
-    esg: "Assigned Analyst"
-  },
-  {
-    key: "4",
-    esg: "Sectors"
-  },
-  {
-    key: "5",
-    esg: "ESG Rating Questings"
-  },
-  {
-    key: "6",
-    esg: "Region"
-  }, {
-    key: "7",
-    esg: "Holdings"
-  },
-  {
-    key: "8",
-    esg: "Is Held"
-  },
-  {
-    key: "9",
-    esg: "Is Assigned"
-  },
-  {
-    key: "10",
-    esg: "Rating"
-  },
-  {
-    key: "11",
-    esg: "Engagement Mode"
-  }, {
-    key: "12",
-    esg: "Objective"
-  }, {
-    key: "13",
-    esg: "Engagement Type"
-  }, {
-    key: "14",
-    esg: "Company Representative"
-  },
-  {
-    key: "15",
-    esg: "Engagement Topics"
-  }
-]);
+// let t1 = ref(''),b1=ref(true)
+// let t2 = ref(''),b2 = ref(true)
+// let t3 = ref(''),b3 = ref(true)
+// let t4 = ref(''),b4 = ref(true)
+// let p = ref<HTMLElement | null>(null)
+// let p1 = ref<HTMLElement | null>(null)
+// let p2 = ref<HTMLElement | null>(null)
+// let p3 = ref<HTMLElement | null>(null)
+// function el(e:HTMLElement){
+//   console.log(e)
+//   p.value=e
+//  // e.innerText='<Add Title here>'
+// }
+// function el2(e:HTMLElement){
+//   p1.value=e
+// }
+// function el3(e:HTMLElement){
+//   p2.value=e
+// }
+// function el4(e:HTMLElement){
+//   p3.value=e
+// }
+// onMounted(()=>{
+//   p.value.innerText='<Add Title here>'
+//   p1.value.innerText='<Add Key Takeaway here>'
+//   p2.value.innerText='<Add PM ation here>'
+//   p3.value.innerText='<Add bullet here>'
+// })
+// function dbc(e){
+//   b1.value=false
+//   p.value.style.top='-2000px'
+// }
+// function dbc1(e){
+//   b2.value=false
+//   p1.value.style.top="-2000px"
+// }
+// function dbc2(e){
+//   b3.value=false
+//   p2.value.style.top="-2000px"
+// }
+// function dbc3(e){
+//   b4.value=false
+//   p3.value.style.top='-2000px'
+// }
+// function sub1(e){
+//   let x=t1.value!=''?t1.value:'<Add Title here>'
+//   b1.value=true
+//   p.value.innerText=x
+//   p.value.style.top=''
+// }
+// function sub2(e){
+//   let x=t2.value!=''?t2.value:'<Add Key Takeaway here>'
+//   b2.value=true
+//   p1.value.innerText=x
+//   p1.value.style.top='-30px'
+// }
+// function sub3(e){
+//   let x=t3.value!=''?t3.value:'<Add PM ation here>'
+//   b3.value=true
+//   p2.value.innerText=x
+//   p2.value.style.top='-30px'
+// }
+// function sub4(e){
+//   let x=t4.value!=''?t4.value:'<Add bullet here>'
+//   b4.value=true
+//   p3.value.innerText=x
+//   p3.value.style.top='-30px'
+// }
 </script>
 
 <script lang="ts">
 export default {
-  name: "Step"
+  name: "Success"
 };
 </script>
 
 <style scoped lang="less">
+.custom-radio-card {
+  padding: 10px 16px;
+  border: 1px solid var(--color-border-2);
+  border-radius: 4px;
+  width: 250px;
+  box-sizing: border-box;
+}
+
+.custom-radio-card-mask {
+  height: 14px;
+  width: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  border: 1px solid var(--color-border-2);
+  box-sizing: border-box;
+}
+
+.custom-radio-card-mask-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+}
+
+.custom-radio-card-title {
+  color: var(--color-text-1);
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.custom-radio-card:hover,
+.custom-radio-card-checked,
+.custom-radio-card:hover .custom-radio-card-mask,
+.custom-radio-card-checked .custom-radio-card-mask {
+  border-color: rgb(var(--primary-6));
+}
+
+.custom-radio-card-checked {
+  background-color: var(--color-primary-light-1);
+}
+
+.custom-radio-card:hover .custom-radio-card-title,
+.custom-radio-card-checked .custom-radio-card-title {
+  color: rgb(var(--primary-6));
+}
+
+.custom-radio-card-checked .custom-radio-card-mask-dot {
+  background-color: rgb(var(--primary-6));
+}
+
+
 .container {
   padding: 0 20px 20px 20px;
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0;
-  background-color: var(--color-bg-2);
-  width: 80%;
-  :deep(.arco-form) {
-    .arco-form-item {
-      &:last-child {
-        margin-top: 20px;
-      }
-    }
-  }
+.eq {
+  position: absolute;
+  height: 30%;
+  width: 30%;
+  background: #f53f3f;
 }
-.cenbom {
-  position: relative;
-  margin: 50px 0 30px 0;
-  display: flex;
-  flex-direction: row;
-  height: 350px;
+
+.wrapper {
+  padding: 24px 150px;
+  background-color: var(--color-bg-2);
+  border-radius: 4px;
+}
+
+.result {
+  margin: 150px 0 0 0;
+}
+
+.operation-wrap {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.steps-wrapper {
+  width: 100%;
+  min-width: fit-content;
+  margin-bottom: 150px;
+  padding: 20px;
+  background-color: rgb(var(--gray-1));
+}
+</style>
+
+<style lang="less" scoped>
+.container {
+  height: 1000px;
   width: 100%;
 }
-:deep(.activeRowLight > .arco-table-td) {
-  background-color: #d6deff !important;
+
+.wrapper {
+  padding: 24px 20px;
+  height: 100%;
+  position: relative;
 }
-.steps {
-  margin-bottom: 76px;
+
+.header {
+  height: 200px;
+  width: 96%;
+  background: cornflowerblue;
+  position: absolute;
+  top: 20px;
+}
+
+.center {
+  height: 600px;
+  width: 100%;
+  position: absolute;
+  top: 220px;
 }
 </style>

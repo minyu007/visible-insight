@@ -1,118 +1,697 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['menu.result', 'menu.result.success']" />
-    <div class="wrapper">
-      <div class="header">
-        <div class="eq">
-          <p style="margin-left: 30px;color: white;font-size: 25px;font-weight: bold">Equity</p>
+    <Breadcrumb :items="['Authoring', 'Authoring-edit']" />
+    <a-spin :loading="loading" style="width: 100%">
+      <a-card class="general-card">
+        <div style="margin-left: 20%;font-size: 15px;color: black;height: 30px;padding-top: 20px;margin-bottom: 20px">
+          ESG Rating List
         </div>
-        <p style="margin-left: 30px;margin-top: 70px;color: white;font-size: 16px">2 | TSENG,JONATHAN | 03 Nov 2023 | ESG: B(E:2.55,S:2.23,G:2.35)</p>
-        <p style="margin-left: 30px;color: white;font-size: 16px">Owned / Allowed: 0.05%/0.99%</p>
-        <p style="margin-left: 30px;color: white;font-size: 16px">Price / Mkt Caps:Usd 189.68 / USD 2,950,202m</p>
-        <p style="position: absolute;top: 5px;right: 5%;font-weight: bold;color: white;font-size: 25px">APPLE INC(AAPL.US)</p>
-        <p style="position: absolute;top: 27%;right: 5%;font-size: 16px;color:white;">Technology Hardware & Equipment | UNITED</p>
-        <p style="position: absolute;top: 44%;right: 5%;font-size: 16px;color:white;">LI,JACKIE +8641139457059</p>
-        <p style="position: absolute;top: 62%;right: 5%;font-size: 16px;color:white;">18 November 2023, 15:26(GMT+8)</p>
-      </div>
-      <div class="center">
-        <p  @dblclick="dbc" style="position: relative;margin-left: 30px;font-size: 25px" :ref="el" class="t"></p>
-        <input style="margin-left: 30px;position: absolute;top: 25px" v-model="t1" v-if="!b1" @keyup.enter="sub1">
+        <div class="cen" style="display:flex;flex-direction: row;width: 100%;">
+          <div style="width: 18%;height: 110%;margin-right: 2%;margin-top: -3%">
+            <a-table  style="height: 100%;width: 100%;" :columns="columns4" :data="data4" :pagination="false" />
+          </div>
+          <div class="wrapper">
+            <a-table style="height: 300px;width: 100%" :columns="columns" :data="data" :scroll="scroll"
+                     :loading="bool" :row-class="activeRowClass"
+                     @row-click="cl"
+                     :pagination="false"
+            />
+            <div class="cenbom">
+              <!--            <template #title></template>  <template #title>ESG Rating Preview</template>-->
+              <p style="position: absolute;top: -60px;font-size: 15px;color: black">ESG Engagement</p>
+              <p style="position: absolute;top: -60px;font-size: 15px;left: 52%;color: black">ESG Rating Preview</p>
 
-        <div STYLE="background: aquamarine;width: 96%;position: relative">
-          <p style="font-weight: bold;font-size: 17px;margin-left: 30px;position: relative;top: 5px">KEY TAKEAWAY:</p>
-          <p :ref="el2" @dblclick="dbc1" style="position: relative;z-index: 10;left: 18%;top: -30px;font-size: 14px">ddd</p>
-          <input style="position: relative;z-index: 10;left: 18%;top: -30px;" v-if="!b2" @keyup.enter="sub2" v-model="t2">
-        </div>
+              <div style="width: 50%;height: 350px;display: flex;">
 
-        <div STYLE="background: aquamarine;width: 96%;position: relative">
-          <p style="font-weight: bold;font-size: 17px;margin-left: 30px;position: relative;top: 5px">PM ACTION:</p>
-          <p :ref="el3" @dblclick="dbc2" style="position: relative;z-index: 10;left: 18%;top: -30px;font-size: 14px">sss</p>
-          <input style="position: relative;z-index: 10;left: 18%;top: -30px;" v-if="!b3" @keyup.enter="sub3" v-model="t3">
+                <a-table style="width: 99%;" :columns="columns2" :data="data2" :expandable="expandable"
+                         :scroll="scroll1" :loading="bool2" :pagination="false"/>
+              </div>
+              <div style="width: 50%;height: 350px;display: flex;flex-direction: column">
+                <div style="height: 10%;margin-bottom: 30px;margin-left: 20px">
+                  <a-space>
+                    <a-popover title="Overall">
+                      <a-button @click="changetable">Overall</a-button>
+                      <!--                      <template #content>-->
+                      <!--                        <p>Here is the text content</p>-->
+                      <!--                        <p>Here is the text content</p>-->
+                      <!--                      </template>-->
+                    </a-popover>
+                    <a-popover title="Environmental" >
+                      <a-button @click="changetable1">Environmental</a-button>
+                      <!--                      <template #content>-->
+                      <!--                        <p>Here is the text content</p>-->
+                      <!--                        <p>Here is the text content</p>-->
+                      <!--                      </template>-->
+                    </a-popover>
+                    <a-popover title="Social">
+                      <a-button @click="changetable2">Social</a-button>
+                      <!--                      <template #content>-->
+                      <!--                        <p>Here is the text content</p>-->
+                      <!--                        <p>Here is the text content</p>-->
+                      <!--                      </template>-->
+                    </a-popover>
+                    <a-popover title="Governance">
+                      <a-button @click="changetable3">Governance</a-button>
+                      <!--                      <template #content>-->
+                      <!--                        <p>Here is the text content</p>-->
+                      <!--                        <p>Here is the text content</p>-->
+                      <!--                      </template>-->
+                    </a-popover>
+                  </a-space>
+                </div>
+                <a-table style="width: 99%;margin-left: 20px" :columns="columns3" :data="data3" :loading="bool2"
+                         :scroll="scroll2" :bordered="{headerCell:true}" v-if="b1" :pagination="false"/>
+                <a-table style="width: 99%;margin-left: 20px" :columns="columns31" :data="data31" :loading="bool2"
+                         :scroll="scroll2" :bordered="{headerCell:true}" v-if="b2" :pagination="false"/>
+                <a-table style="width: 99%;margin-left: 20px" :columns="columns32" :data="data32" :loading="bool2"
+                         :scroll="scroll2" :bordered="{headerCell:true}" v-if="b3" :pagination="false"/>
+                <a-table style="width: 99%;margin-left: 20px" :columns="columns33" :data="data33" :loading="bool2"
+                         :scroll="scroll2" :bordered="{headerCell:true}" v-if="b4" :pagination="false"/>
+              </div>
+            </div>
+          </div>
         </div>
-        <p style="font-size: 16px;font-weight: bold;margin-left: 30px">Analysis & Outlook:</p>
-        <div style="margin-left: 30px;height: 10px;width: 10px;border-left: brown 5px solid;border-top: white 5px solid;border-bottom: white 5px solid"></div> <p></p>
-        <p :ref="el4" @dblclick="dbc3" style="position: relative;top: -28px;left: 60px;font-size: 14px">h</p>
-        <input v-if="!b4" @keyup.enter="sub4" v-model="t4" style="position: relative;top: -52px;left: 60px;">
-      </div>
-    </div>
+      </a-card>
+    </a-spin>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from "vue";
-let t1 = ref(''),b1=ref(true)
-let t2 = ref(''),b2 = ref(true)
-let t3 = ref(''),b3 = ref(true)
-let t4 = ref(''),b4 = ref(true)
-let p = ref<HTMLElement | null>(null)
-let p1 = ref<HTMLElement | null>(null)
-let p2 = ref<HTMLElement | null>(null)
-let p3 = ref<HTMLElement | null>(null)
-function el(e:HTMLElement){
-  console.log(e)
-  p.value=e
- // e.innerText='<Add Title here>'
+import { ref, reactive, onMounted } from "vue";
+let bool = ref(true);
+let bool2 =ref(true)
+onMounted(function() {
+  setTimeout(() => {
+    bool.value = false;
+    bool2.value=false
+  }, 1500);
+});
+const scroll = {
+  x: 1500,
+  y: 200
+};
+const scroll1 = {
+  x: 1000,
+  y: 250
+};
+const scroll2 = {
+  x: 1000,
+  y: 150
+};
+let b1 = ref(true), b2 = ref(false), b3 = ref(false), b4 = ref(false);
+let changetable = function() {
+  b1.value = true;
+  b2.value = false;
+  b3.value = false;
+  b4.value = false;
+};
+let changetable2 = function() {
+  b1.value = false;
+  b2.value = false;
+  b3.value = true;
+  b4.value = false;
+};
+let changetable3 = function() {
+  b1.value = false;
+  b2.value = false;
+  b3.value = false;
+  b4.value = true;
+
+};
+let changetable1 = function() {
+  b1.value = false;
+  b2.value = true;
+  b3.value = false;
+  b4.value = false;
+
+};
+let actives = ref('')
+let activeRowClass =  (record) => {
+  // console.log(record)
+  return record.key === actives.value ? 'activeRowLight' : '';
+};
+
+const cl = (record) => {
+  // console.log(record.key)
+  actives.value=record.key
+  bool2.value=true
+  setTimeout(() => {
+    bool2.value = false;
+  }, 1500);
 }
-function el2(e:HTMLElement){
-  p1.value=e
-}
-function el3(e:HTMLElement){
-  p2.value=e
-}
-function el4(e:HTMLElement){
-  p3.value=e
-}
-onMounted(()=>{
-  p.value.innerText='<Add Title here>'
-  p1.value.innerText='<Add Key Takeaway here>'
-  p2.value.innerText='<Add PM ation here>'
-  p3.value.innerText='<Add bullet here>'
-})
-function dbc(e){
-  b1.value=false
-  p.value.style.top='-2000px'
-}
-function dbc1(e){
-  b2.value=false
-  p1.value.style.top="-2000px"
-}
-function dbc2(e){
-  b3.value=false
-  p2.value.style.top="-2000px"
-}
-function dbc3(e){
-  b4.value=false
-  p3.value.style.top='-2000px'
-}
-function sub1(e){
-  let x=t1.value!=''?t1.value:'<Add Title here>'
-  b1.value=true
-  p.value.innerText=x
-  p.value.style.top=''
-}
-function sub2(e){
-  let x=t2.value!=''?t2.value:'<Add Key Takeaway here>'
-  b2.value=true
-  p1.value.innerText=x
-  p1.value.style.top='-30px'
-}
-function sub3(e){
-  let x=t3.value!=''?t3.value:'<Add PM ation here>'
-  b3.value=true
-  p2.value.innerText=x
-  p2.value.style.top='-30px'
-}
-function sub4(e){
-  let x=t4.value!=''?t4.value:'<Add bullet here>'
-  b4.value=true
-  p3.value.innerText=x
-  p3.value.style.top='-30px'
-}
+//////
+const columns = [
+  {
+    title: "BBC Ticker",
+    dataIndex: "bbc Ticker"
+  },
+  {
+    title: "ISIN",
+    dataIndex: "isin"
+  },
+  {
+    title: "CUSIP",
+    dataIndex: "cusip"
+  },
+  {
+    title: "Debt Ticker",
+    dataIndex: "debt ticker"
+  },
+  {
+    title: "Issure Name",
+    dataIndex: "issure name"
+  },
+  {
+    title: "Fi Assigned Analyst",
+    dataIndex: "fi assigned analyst"
+  },
+  {
+    title: "Eq Assigned Analyst",
+    dataIndex: "eq assigned analyst"
+  },
+  {
+    title: "Holding Fund Name",
+    dataIndex: "holding fund name"
+  },
+  {
+    title: "MSCI ESG Rating",
+    dataIndex: "msci esg rating"
+  }
+
+];
+const data = reactive([{
+  key: "1",
+  "bbc Ticker": "FOUR.LN",
+  isin: "GB0006640972",
+  cusip: "087998",
+  "debt ticker": "       ",
+  "issure name": "4IMPRINT GROUP PLC",
+  "fi assigned analyst": "     ",
+  "eq assigned analyst": "TURNER,BEN",
+  "holding fund name": "BUMA-UI-FDS | FIDELITY",
+  "msci esg rating": "AA",
+  "msci derived esg rating": "     "
+}, {
+  key: "2",
+  "bbc Ticker": "MMM.US",
+  isin: "US88579Y1010",
+  cusip: "88579Y",
+  "debt ticker": "MMM CORP",
+  "issure name": "3M CO",
+  "fi assigned analyst": "MISSAR,BOBBY",
+  "eq assigned analyst": "PAREKH,SHREEJI",
+  "holding fund name": "FID GLBL CONC EQTY FND D...",
+  "msci esg rating": "AAA",
+  "msci derived esg rating": "     "
+}, {
+  key: "3",
+  "bbc Ticker": "688536.CH",
+  isin: "CNE1000042T2",
+  cusip: "B19229",
+  "debt ticker": "       ",
+  "issure name": "3PEAK INC",
+  "fi assigned analyst": "     ",
+  "eq assigned analyst": "WANG,VIVIAN MZ",
+  "holding fund name": "      ",
+  "msci esg rating": "CCC",
+  "msci derived esg rating": "     "
+}, {
+  key: "4",
+  "bbc Ticker": "RRRP3.BZ",
+  isin: "BRRRRPACNOR5",
+  cusip: "B25862",
+  "debt ticker": "       ",
+  "issure name": "3R PETROLEUM OLEO E GA...",
+  "fi assigned analyst": "     ",
+  "eq assigned analyst": "STAFFORD,LAURA",
+  "holding fund name": "FID FDS SUST RE EM EQ PL,FI...",
+  "msci esg rating": "BBB",
+  "msci derived esg rating": "     "
+}, {
+  key: "5",
+  "bbc Ticker": "1530.HK",
+  isin: "KYG8875G1029",
+  cusip: "8875Y",
+  "debt ticker": "          ",
+  "issure name": "3SBIO INC",
+  "fi assigned analyst": "     ",
+  "eq assigned analyst": "LANG,YUANLIN",
+  "holding fund name": "      ",
+  "msci esg rating": "AA",
+  "msci derived esg rating": "     "
+}]);
+///
+const expandable = reactive({
+  title: "Expand",
+  width: 80,
+  expandedRowRender: (record) => {
+    if (record.key === "1") {
+      return `EXECUTIVE REMUNERATION----- Responed to remuneration consultation letter. The main change they are proposing for the upcoming three-year
+              period is the possibility of introducing an LTIP`;
+    } else if (record.key === "2") {
+      return `BUSINESS ETHICS---- We encouraged companies to manage social impacts on communities arising from the cost-of-living crisis in a responsible manner`;
+    } else if (record.key === "3") {
+      return;
+    } else if (record.key === "4") {
+      return;
+    }
+  }
+});
+const columns2 = [
+  {
+    title: "Date",
+    dataIndex: "date"
+  },
+  {
+    title: "Analyst",
+    dataIndex: "analyst"
+  },
+  {
+    title: "Objective",
+    dataIndex: "objective"
+  },
+  {
+    title: "Engagement Type",
+    dataIndex: "engagement type"
+  },
+  {
+    title: "Engagement Mode",
+    dataIndex: "engagement mode"
+  },
+  {
+    title: "Company Rpresentative",
+    dataIndex: "company rpresentative"
+  },
+  {
+    title: "Engagement Topic Area(s)",
+    dataIndex: "engagement topic area(s)"
+  }
+];
+
+const data2 = reactive([
+  {
+    key: "1",
+    date: "10 Oct 2023",
+    analyst: "ROBERTS FIL,MATTHEW",
+    objective: "Policy development",
+    "engagement type": "reactive",
+    "engagement mode": "Written Correspondence",
+    "company representative": "Remuneration Committee chair...",
+    "engagement topic area(s)": "EXECUTIVE REMUNERATION"
+  }, {
+    key: "2",
+    date: "22 Nov 2022",
+    analyst: "ROBERTS FIL,MATTHEW",
+    objective: "Improved performance",
+    "engagement type": "Thematic",
+    "engagement mode": "Written Correspondence",
+    "company representative": "Chairman",
+    "engagement topic area(s)": "BUSINESS ETHICS,CLIMATE CHANGE,EXECUTIVE REMUNERATION"
+  }, {
+    key: "3",
+    date: "26 Nov 2020",
+    analyst: "RoMANO,LUCA",
+    objective: "N/A",
+    "engagement type": "Proactive",
+    "engagement mode": "Conference Call",
+    "company representative": "Chairman",
+    "engagement topic area(s)": "EXECUTIVE REMUNERATION"
+  }, {
+    key: "4",
+    date: "09 Jul 2020",
+    analyst: "ROBERTS FIL,MATTHEW",
+    objective: "N/A",
+    "engagement type": "proactive",
+    "engagement mode": "Written Correspondence",
+    "company representative": "Investor Relations",
+    "engagement topic area(s)": "EXECUTIVE REMUNERATION"
+  }
+]);
+//
+const columns3 = reactive([{
+  title: "Metrics & Data Reference",
+  dataIndex: "mdr",
+  // fixed: "left",
+  width: 140
+},
+  {
+    title: "Sub-Industry Average",
+    dataIndex: "sia",
+    // fixed: "left",
+    width: 140
+  }, {
+    title: "MSCI Average",
+    dataIndex: "ma",
+    // fixed: "right",
+    width: 120
+  },
+  {
+    title: "3R PETROLEUM OLEO GAS SA",
+    children: [{
+      title: "MSCI Score",
+      width: 100,
+      dataIndex: "ms"
+    }, {
+      title: "ESG Score",
+      width: 100,
+      dataIndex: "es"
+    }, {
+      title: "Comment",
+      dataIndex: "com",
+      // fixed: "right",
+      width: 120
+    }
+    ]
+  }]);
+const data3 = reactive([{
+  key: "1",
+  mdr: "Based on your analysis of the company's sus... ",
+  sia: "Improving",
+  ma: "",
+  ms: "",
+  es: "Stable",
+  com: "34"
+}, {
+  key: "2",
+  mdr: "Based on your analysis of the company's man... ",
+  sia: "C",
+  ma: "B",
+  ms: "BBB",
+  es: "D",
+  com: "34"
+},
+  {
+    key: "3",
+    mdr: "Equity - How have you factored in ESG risk in your fundamental valuations for the company/issure",
+    sia: "",
+    ma: "",
+    ms: "",
+    es: "",
+    com: "34"
+  },
+  {
+    key: "4",
+    mdr: "Fixed Income/PCT - How have you factored in ESG risk in your fundamental/relative value rating for the company/issuer",
+    sia: "",
+    ma: "",
+    ms: "",
+    es: "",
+    com: "34"
+  }
+]);
+//
+const columns31 = reactive([
+  {
+    title: "Metrics & Data Reference",
+    dataIndex: "mdr",
+    // fixed: "left",
+    width: 140
+  },{
+    title: "Weight",
+    dataIndex: "w",
+    // fixed: "right",
+    width: 120
+  },
+  {
+    title: "Sub-Industry Average",
+    dataIndex: "sia",
+    // fixed: "left",
+    width: 140
+  },
+  {
+    title: "3R PETROLEUM OLEO GAS SA",
+    children: [{
+      title: "Value",
+      width: 100,
+      dataIndex: "v"
+    }, {
+      title: "Score",
+      width: 100,
+      dataIndex: "s"
+    }, {
+      title: "Comment",
+      dataIndex: "com",
+      // fixed: "right",
+      width: 120
+    }
+    ]
+  }
+]);
+const data31 = reactive([{
+  key: "1",
+  mdr: "How does the company manage the water usage from its operations",
+  sia: "1.48",
+  w: "5%",
+  s: "0",
+  v: "",
+  com: "No disclosure"
+}, {
+  key: "2",
+  mdr: "How does the company manage the GHG emissions from its operations?",
+  sia: "1.46",
+  w: "55%",
+  s: "0.5",
+  v: "",
+  com: "The company has a project in pace to..."
+},
+  {
+    key: "3",
+    mdr: "How does the company manage the toxic emissions from its operations?",
+    sia: "1.24",
+    w: "10%",
+    s: "0",
+    v: "",
+    com: "No disclosure"
+  },
+  {
+    key: "4",
+    mdr: "How does the company manage the negative impact associated with sea use in regards to biodiversity",
+    sia: "1.47",
+    w: "5%",
+    s: "0",
+    v: "",
+    com: "No disclosure"
+  }
+]);
+//
+const columns32 = reactive([
+  {
+    title: "Metrics & Data Reference",
+    dataIndex: "mdr",
+    // fixed: "left",
+    width: 140
+  },{
+    title: "Weight",
+    dataIndex: "w",
+    // fixed: "right",
+    width: 120
+  },
+  {
+    title: "Sub-Industry Average",
+    dataIndex: "sia",
+    // fixed: "left",
+    width: 140
+  },
+  {
+    title: "3R PETROLEUM OLEO GAS SA",
+    children: [{
+      title: "Value",
+      width: 100,
+      dataIndex: "v"
+    }, {
+      title: "Score",
+      width: 100,
+      dataIndex: "s"
+    }, {
+      title: "Comment",
+      dataIndex: "com",
+      // fixed: "right",
+      width: 120
+    }
+    ]
+  }
+]);
+const data32 = reactive([{
+  key: "4",
+  mdr: "How does the company manage the negative impact associated with sea use in regards to biodiversity",
+  sia: "1.47",
+  w: "35%",
+  s: "0",
+  v: "",
+  com: "No disclosure"
+}, {
+  key: "2",
+  mdr: "How does the company manage the GHG emissions from its operations?",
+  sia: "1.46",
+  w: "55%",
+  s: "0.5",
+  v: "",
+  com: "The company has a project in pace to..."
+},
+  {
+    key: "3",
+    mdr: "How does the company manage the toxic emissions from its operations?",
+    sia: "1.24",
+    w: "10%",
+    s: "0",
+    v: "",
+    com: "No disclosure"
+  },
+  {
+    key: "4",
+    mdr: "How does the company manage the negative impact associated with sea use in regards to biodiversity",
+    sia: "1.47",
+    w: "5%",
+    s: "0",
+    v: "",
+    com: "No disclosure"
+  }
+]);
+//
+const columns33 = reactive([
+  {
+    title: "Metrics & Data Reference",
+    dataIndex: "mdr",
+    // fixed: "left",
+    width: 140
+  },
+  {
+    title: "Sub-Industry Average",
+    dataIndex: "sia",
+    // fixed: "left",
+    width: 140
+  },
+  {
+    title: "3R PETROLEUM OLEO GAS SA",
+    children: [{
+      title: "Value",
+      width: 100,
+      dataIndex: "v"
+    }, {
+      title: "Score",
+      width: 100,
+      dataIndex: "s"
+    },{
+      title: "Weight",
+      dataIndex: "w",
+      // fixed: "right",
+      width: 120
+    },{
+      title: "Comment",
+      dataIndex: "com",
+      // fixed: "right",
+      width: 120
+    }
+    ]
+  }
+]);
+const data33 = reactive([{
+  key: "1",
+  mdr: "Management quality score",
+  sia: "1.68",
+  w: "20%",
+  s: "1",
+  v: "",
+  com: "None"
+}, {
+  key: "2",
+  mdr: "Board Effectiveness",
+  sia: "1.35",
+  w: "10%",
+  s: "1",
+  v: "",
+  com: "No issues"
+},
+  {
+    key: "3",
+    mdr: "How does the company manage the toxic emissions from its operations?",
+    sia: "1.24",
+    w: "10%",
+    s: "0",
+    v: "",
+    com: "No disclosure"
+  },
+  {
+    key: "4",
+    mdr: "How does the company manage the negative impact associated with sea use in regards to biodiversity",
+    sia: "1.47",
+    w: "5%",
+    s: "0",
+    v: "",
+    com: "No disclosure"
+  }
+]);
+
+
+const columns4 = [
+  {
+    title: "ESG Function",
+    dataIndex: "esg"
+  }
+];
+const data4 = reactive([
+  {
+    key: "1",
+    esg: "Time Frame"
+  },
+  {
+    key: "2",
+    esg: "Holdings Time Frame"
+  },
+  {
+    key: "3",
+    esg: "Assigned Analyst"
+  },
+  {
+    key: "4",
+    esg: "Sectors"
+  },
+  {
+    key: "5",
+    esg: "ESG Rating Questings"
+  },
+  {
+    key: "6",
+    esg: "Region"
+  }, {
+    key: "7",
+    esg: "Holdings"
+  },
+  {
+    key: "8",
+    esg: "Is Held"
+  },
+  {
+    key: "9",
+    esg: "Is Assigned"
+  },
+  {
+    key: "10",
+    esg: "Rating"
+  },
+  {
+    key: "11",
+    esg: "Engagement Mode"
+  }, {
+    key: "12",
+    esg: "Objective"
+  }, {
+    key: "13",
+    esg: "Engagement Type"
+  }, {
+    key: "14",
+    esg: "Company Representative"
+  },
+  {
+    key: "15",
+    esg: "Engagement Topics"
+  }
+]);
 </script>
 
 <script lang="ts">
 export default {
-  name: "Success"
+  name: "Step"
 };
 </script>
 
@@ -120,59 +699,34 @@ export default {
 .container {
   padding: 0 20px 20px 20px;
 }
-.eq{
-  position: absolute;
-  height: 30%;
-  width: 30%;
-  background: #f53f3f;
-}
+
 .wrapper {
-  padding: 24px 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
   background-color: var(--color-bg-2);
-  border-radius: 4px;
+  width: 80%;
+  :deep(.arco-form) {
+    .arco-form-item {
+      &:last-child {
+        margin-top: 20px;
+      }
+    }
+  }
 }
-
-.result {
-  margin: 150px 0 0 0;
-}
-
-.operation-wrap {
-  margin-bottom: 40px;
-  text-align: center;
-}
-
-.steps-wrapper {
-  width: 100%;
-  min-width: fit-content;
-  margin-bottom: 150px;
-  padding: 20px;
-  background-color: rgb(var(--gray-1));
-}
-</style>
-
-<style lang="less" scoped>
-.container {
-  height: 1000px;
-  width: 100%;
-}
-
-.wrapper {
-  padding: 24px 20px;
-  height: 100%;
+.cenbom {
   position: relative;
-}
-
-.header {
-  height: 200px;
-  width: 96%;
-  background: cornflowerblue;
-  position: absolute;
-  top: 20px;
-}
-.center{
-  height: 600px;
+  margin: 50px 0 30px 0;
+  display: flex;
+  flex-direction: row;
+  height: 350px;
   width: 100%;
-  position: absolute;
-  top: 220px;
+}
+:deep(.activeRowLight > .arco-table-td) {
+  background-color: #d6deff !important;
+}
+.steps {
+  margin-bottom: 76px;
 }
 </style>
