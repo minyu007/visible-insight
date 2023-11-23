@@ -24,7 +24,7 @@
           </a-card>
         </div>
       </a-col>
-      <a-col
+      <!-- <a-col
         class="list-col"
         :xs="12"
         :sm="12"
@@ -57,16 +57,14 @@
                 <div
                   :style="{ display: 'flex', alignItems: 'center', color: '#1D2129' }"
                 >
-                  <!-- <a-avatar :size="24" :style="{ marginRight: '8px' }">
-                    A
-                  </a-avatar> -->
+                  
                   <icon-font type="icon-jifenduihuan" :size="24" />
                 </div>
               </template>
             </a-card-meta>
           </a-card>
         </div>
-      </a-col>
+      </a-col> -->
 
       <a-col
         class="list-col"
@@ -184,7 +182,12 @@
                 >
                   <img :style="{ width: '15%' }" alt="Wind" :src="WindLogo" />
                 </span>
-                <a-link>Connect</a-link>
+                <a-button type="text" :loading="isConnecting" @click="doConnect">Connect</a-button>
+                <!-- <a-spin v-if="isConnecting">
+                  <template #icon>
+                    <icon-sync />
+                  </template>
+                </a-spin> -->
               </div>
             </a-card>
           </div>
@@ -212,7 +215,7 @@
                 >
                   <img :style="{ width: '12%' }" alt="CSV" :src="CSVLogo" />
                 </span>
-                <a-link>Connect</a-link>
+                <a-button type="text">Connect</a-button>
               </div>
             </a-card>
           </div>
@@ -240,11 +243,14 @@
                 >
                   <img :style="{ width: '22%' }" alt="Discovery" :src="FILLogo" />
                 </span>
-                <a-link>Connect</a-link>
+                <a-button type="text">Connect</a-button>
               </div>
             </a-card>
           </div>
         </a-col>
+      </a-row>
+      <a-row class="list-row" :gutter="24">
+
       </a-row>
     </a-modal>
   </div>
@@ -274,6 +280,8 @@
 
   const visible = ref(false);
 
+  const isConnecting = ref(false);
+
   const handleClick = () => {
     visible.value = true;
   };
@@ -282,6 +290,14 @@
   };
   const handleCancel = () => {
     visible.value = false;
+  }
+
+  const doConnect = () => {
+    isConnecting.value = true
+    const timer = setTimeout(() => {
+      isConnecting.value = false
+      clearTimeout(timer)
+    }, 1500)
   }
 </script>
 

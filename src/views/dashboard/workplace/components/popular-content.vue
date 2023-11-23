@@ -35,7 +35,7 @@
         >
           <template #columns>
             <a-table-column title="Ticker" data-index="key"></a-table-column>
-            <a-table-column title="Company Name" data-index="title">
+            <a-table-column title="Company" data-index="title">
               <template #cell="{ record }">
                 <a-typography-paragraph
                   :ellipsis="{

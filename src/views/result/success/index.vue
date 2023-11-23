@@ -1,13 +1,13 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['Authoring', 'Authoring-edit']" />
+    <Breadcrumb :items="['ESG', 'ESG-List']" />
     <a-spin :loading="loading" style="width: 100%">
       <a-card class="general-card">
         <div style="margin-left: 20%;font-size: 15px;color: black;height: 30px;padding-top: 20px;margin-bottom: 20px">
           ESG Rating List
         </div>
         <div class="cen" style="display:flex;flex-direction: row;width: 100%;">
-          <div style="width: 18%;height: 110%;margin-right: 2%;margin-top: -3%">
+          <div style="width: 18%;height: 110%;margin-right: 2%;">
             <a-table  style="height: 100%;width: 100%;" :columns="columns4" :data="data4" :pagination="false" />
           </div>
           <div class="wrapper">

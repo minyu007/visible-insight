@@ -1,13 +1,13 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['menu.result', 'menu.result.success']" />
+    <Breadcrumb :items="['Authoring', 'Authoring-Edit']" />
 
     <div class="wrapper">
 
       <div>
         <a-space direction="vertical" size="large">
           <!--          <a-input-search :style="{width:'320px'}" placeholder="Please enter something" button-text="Search" search-button/>-->
-          <a-input-search :style="{width:'520px'}" placeholder="Ticker/company name" search-button>
+          <a-input-search :style="{width:'650px'}" placeholder="Ticker / Company name" search-button>
             <template #button-icon>
               <icon-search />
             </template>
@@ -58,14 +58,21 @@
         <div style="display:flex;flex-direction: row">
           <a-space direction="vertical" size="large">
           <a-select :style="{width:'220px',marginTop: '20px'}" placeholder="Please select ...">
-            <a-option>monthly data update</a-option>
-            <a-option>earnings result update</a-option>
+            <a-option>Monthly Data Update</a-option>
+            <a-option>Earnings Result Update</a-option>
           </a-select>
           </a-space>
-          <a-button @click="cl" style="width: 100px;margin-top: 20px;margin-left: 600px" type="primary">Crate</a-button>
-          <a-button style="width: 100px;margin-top: 20px;margin-left: 20px" type="outline">Preview</a-button>
+          
 
         </div>
+        <a-row :style="{marginTop: '20px'}">
+          <a-col>
+            <a-space>
+              <a-button @click="cl"  type="primary">Crate</a-button>
+              <a-button type="outline">Preview</a-button>
+            </a-space>
+          </a-col>
+        </a-row>
         <p style="font-weight: bold;font-size: 17px;position: relative;top: 5px">KEY TAKEAWAY:</p>
         <textarea style="width: 100%;height: 100px"></textarea>
         <p style="font-weight: bold;font-size: 17px;position: relative;top: 5px">PM ACTION:</p>
@@ -225,7 +232,7 @@ export default {
   padding: 10px 16px;
   border: 1px solid var(--color-border-2);
   border-radius: 4px;
-  width: 250px;
+  width: 200px;
   box-sizing: border-box;
 }
 
@@ -250,7 +257,6 @@ export default {
   color: var(--color-text-1);
   font-size: 14px;
   font-weight: bold;
-  margin-bottom: 8px;
 }
 
 .custom-radio-card:hover,

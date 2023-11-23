@@ -3,9 +3,10 @@
     <div class="logo">
       <img
         alt="logo"
+        class="logo1"
         src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image"
       />
-      <div class="logo-text">Arco Design Pro</div>
+      <div class="logo-text">Visible Insight</div>
     </div>
     <LoginBanner />
     <div class="content">
@@ -51,7 +52,8 @@
       width: 100%;
     }
   }
-
+  
+ 
   .logo {
     position: fixed;
     top: 24px;

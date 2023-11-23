@@ -40,7 +40,7 @@ export default {
   'menu.profile': 'Profile',
   'menu.visualization': 'Data Visualization',
   'menu.user': 'User Center',
-  'menu.arcoWebsite': 'Arco Design',
+  'menu.arcoWebsite': 'Visible Insight',
   'menu.faq': 'FAQ',
   'navbar.docs': 'Docs',
   'navbar.action.locale': 'Switch to English',

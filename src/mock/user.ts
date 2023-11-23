@@ -7,6 +7,8 @@ import setupMock, {
 import { MockParams } from '@/types/mock';
 import { isLogin } from '@/utils/auth';
 
+import avatar from '@/assets/images/avatar.jpg'
+
 setupMock({
   setup() {
     // Mock.XHR.prototype.withCredentials = true;
@@ -16,9 +18,8 @@ setupMock({
       if (isLogin()) {
         const role = window.localStorage.getItem('userRole') || 'admin';
         return successResponseWrap({
-          name: 'Kevin',
-          avatar:
-            'https://pbs.twimg.com/profile_images/1725009898289909760/uFaVj2j4_400x400.jpg',
+          name: 'Johnson',
+          avatar: avatar,
           email: 'wangliqun@email.com',
           job: 'frontend',
           jobName: '前端艺术家',

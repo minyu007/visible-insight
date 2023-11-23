@@ -3,7 +3,9 @@
     <div class="left-side">
       <a-space>
         <img
+        class="logo1"
           alt="logo"
+          style="width:50px"
           src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image"
         />
         <a-typography-title
@@ -312,6 +314,7 @@
       margin-left: 14px;
     }
   }
+
 </style>
 
 <style lang="less">

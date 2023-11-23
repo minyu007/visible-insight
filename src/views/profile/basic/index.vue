@@ -59,7 +59,7 @@
               <a-space>
                 <div class="item todo">
                   <a-divider orientation="left">
-                    <a-typography-text>1. Company list</a-typography-text>
+                    <a-typography-text  type="primary">Company list</a-typography-text>
                   </a-divider>
                   <a-table 
                     :columns="columns" 
@@ -68,7 +68,7 @@
                     :bordered="true"
                     :hoverable="true"
                     size="mini"
-                    :virtual-list-props="{ height: 500 }"
+                    :virtual-list-props="{ height: 600 }"
                   >
                     <template #operation="{ record }">
                       <a-button
@@ -95,10 +95,10 @@
                 </div>
                 <div class="item working">
                   <a-divider orientation="left">
-                    <a-typography-text>2. Indicator</a-typography-text>
+                    <a-typography-text  type="warning">Indicators</a-typography-text>
                   </a-divider>
                   <a-checkbox-group :default-value="[]"  @change="handleChange">
-                    <template v-for="indicator in indicatorList" :key="indicator">
+                    <template v-for="indicator in indicatorList1" :key="indicator">
                       <a-checkbox :value="indicator" :style="{marginBottom: '8px'}">
                         <template #checkbox="{ checked }">
                           <a-space
@@ -120,7 +120,32 @@
                     </template>
                   </a-checkbox-group>
                   <a-divider orientation="left">
-                    <a-typography-text>3. Chart</a-typography-text>
+                    <a-typography-text type="warning">Macroeconomic Indicators</a-typography-text>
+                  </a-divider>
+                  <a-checkbox-group :default-value="[]"  @change="handleChange">
+                    <template v-for="indicator in indicatorList2" :key="indicator">
+                      <a-checkbox :value="indicator" :style="{marginBottom: '8px'}">
+                        <template #checkbox="{ checked }">
+                          <a-space
+                            align="start"
+                            class="custom-checkbox-card"
+                            :class="{ 'custom-checkbox-card-checked': checked }"
+                          >
+                            <div className="custom-checkbox-card-mask">
+                              <div className="custom-checkbox-card-mask-dot" />
+                            </div>
+                            <div>
+                              <div className="custom-checkbox-card-title">
+                                {{ indicator }}
+                              </div>
+                            </div>
+                          </a-space>
+                        </template>
+                      </a-checkbox>
+                    </template>
+                  </a-checkbox-group>
+                  <a-divider orientation="left">
+                    <a-typography-text type="success">Chart</a-typography-text>
                   </a-divider>
                   <Chart height="350px" :option="chartOption" />
                 </div>
@@ -186,14 +211,14 @@
     companyName: 'FOCUS MEDIA INFORMATION TECHNOLOGY CO LTD A',
     isSelected: false,
     analyst: 'Zhang, Warren',
-    fund: 'F/HGD',
+    fund: 'CSSIT',
   },{
     key: 5,
     ticker: '002439.CH',
     companyName: 'BEIJING VENUSTECH INC A',
     isSelected: false,
     analyst: 'Zhang, Warren',
-    fund: 'F/HGD',
+    fund: 'CSSIT',
   },{
     key: 6,
     ticker: '002714.CH',
@@ -298,8 +323,8 @@
   
   const data = ref<any[]>([...rawData])
 
-  const indicatorList = ['Revenue Growth', 'Gross Profit Margin', 'Finance Leverage', 'Tax Burden', 'Interest Burden', 'Asset Turnover', 'ROE', 'ROA', 'GDP']
-
+  const indicatorList1 = ['Revenue Growth', 'Gross Profit Margin', 'Finance Leverage', 'Tax Burden', 'Interest Burden', 'Asset Turnover', 'ROE', 'ROA']
+  const indicatorList2 = ['GDP Growth', 'Interest Rates', 'Inflation Rate']
   const timeseries = ref<any[]>(['FY2012','FY2013','FY2014','FY2015','FY2016','FY2017','FY2018','FY2019','FY2020','FY2021','FY2022','FY2023','FY2024','FY2025'].map(v => parseInt(v.replace('FY', ''))));
   const revenueGrowth = {
     'FOSHAN HAITIAN FLAVORING & FOOD CO LTD A': ['16.1%','18.8%','16.8%','15.0%','10.3%','17.1%','16.8%','16.2%','15.1%','9.7%','2.4%','4.4%','7.4%','12.4%'].map(v => Math.floor(parseFloat(v.replace('%', ''))*100)/10000),
@@ -367,7 +392,7 @@
           data: revenueGrowth[v]
         }
       })
-    } else if(payload.includes('GDP')) {
+    } else if(payload.includes('GDP Growth')) {
       tickers.value = _tickersRaw
       chartData.value = _tickersRaw.map(v => {
 
@@ -478,7 +503,7 @@
     margin: 0 auto 10px;
   }
   .todo {
-    width: 400px;
+    width: 500px;
     height: 800px;
   }
   .working {

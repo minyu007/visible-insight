@@ -55,8 +55,8 @@
         <a-button type="primary" html-type="submit" long :loading="loading">
           {{ $t('login.form.login') }}
         </a-button>
-        <a-button type="text" long class="login-form-register-btn">
-          {{ $t('login.form.register') }}
+        <a-button  long class="login-form-register-btn" type="outline">
+          SSO
         </a-button>
       </a-space>
     </a-form>

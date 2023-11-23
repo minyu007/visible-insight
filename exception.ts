@@ -2,12 +2,12 @@ import { DEFAULT_LAYOUT } from '../base';
 import { AppRouteRecordRaw } from '../types';
 
 const EXCEPTION: AppRouteRecordRaw = {
-  path: '/modeling',
+  path: '/modelling',
   name: 'exception',
   component: DEFAULT_LAYOUT,
-  redirect: '/modeling/modeling-edit',
+  redirect: '/modelling/modelling-edit',
   meta: {
-    locale: 'Modeling',
+    locale: 'modelling',
     requiresAuth: true,
     icon: 'icon-common',
     order: 3,
@@ -15,11 +15,11 @@ const EXCEPTION: AppRouteRecordRaw = {
   },
   children: [
     {
-      path: 'modeling-edit',
+      path: 'modelling-edit',
       name: '403',
       component: () => import('@/views/exception/403/index.vue'),
       meta: {
-        locale: 'Modeling-Edit',
+        locale: 'modelling-Edit',
         requiresAuth: true,
         roles: ['admin'],
         activeMenu: 'exception',
