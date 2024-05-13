@@ -73,10 +73,10 @@
             </a-space>
           </a-col>
         </a-row>
-        <p style="font-weight: bold;font-size: 17px;position: relative;top: 5px">KEY TAKEAWAY:</p>
-        <textarea style="width: 100%;height: 100px"></textarea>
+        <p style="font-weight: bold;font-size: 17px;position: relative;top: 5px">Title: China property Oct 23 update</p>
+        <!-- <textarea style="width: 100%;height: 100px"></textarea>
         <p style="font-weight: bold;font-size: 17px;position: relative;top: 5px">PM ACTION:</p>
-        <textarea style="width: 100%"></textarea>
+        <textarea style="width: 100%"></textarea> -->
         <p style="font-size: 16px;font-weight: bold;">Analysis & Outlook:</p>
         <div v-if="act" style="width: 100%;height: 150px;border: 1px black solid;text-align: center">
           <a-spin :loading="loading" tip="This may take a while..." style="width: 400px;margin-top: 70px">

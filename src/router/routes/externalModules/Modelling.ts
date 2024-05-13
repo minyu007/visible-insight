@@ -1,8 +1,8 @@
 export default {
-  path: 'https://my.causal.app/models/205549/edit',
-  name: 'modelling',
+  path: 'http://www.baidu.com',
+  name: 'TBD...',
   meta: {
-    locale: 'Modelling',
+    locale: 'TBD...',
     icon: 'icon-common',
     requiresAuth: true,
     order: 3,

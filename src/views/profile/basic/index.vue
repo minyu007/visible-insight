@@ -334,6 +334,8 @@
     'GDP': ['7.9%','7.8%','7.4%','7.0%','6.8%','6.9%','6.7%','6.0%','2.2%','8.4%','3.0%','4.5%','5.3%','6.0%'].map(v => Math.floor(parseFloat(v.replace('%', ''))*100)/10000)
   }
 
+  console.log(revenueGrowth)
+
   const tickers =  ref<any[]>([])
   const chartData =  ref<any[]>([])
   const tickersRaw = ['FOSHAN HAITIAN FLAVORING & FOOD CO LTD A', 'QIANHE CONDIMENT AND FOOD CO LTD A', 'ANGEL YEAST CO LTD A', 'JIANGSU HENGSHUN VGR IND CO A']
@@ -379,7 +381,6 @@
         return {
           name: v,
           type: 'line',
-          stack: 'Total',
           showSymbol: false,
           smooth: true,
           symbolSize: 12,
@@ -399,7 +400,6 @@
         return {
           name: v,
           type: 'line',
-          stack: 'Total',
           showSymbol: false,
           smooth: true,
           symbolSize: 12,

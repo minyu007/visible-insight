@@ -48,4 +48,9 @@ export default defineConfig({
       },
     },
   },
+  server: {
+    proxy: {
+      '/amc-pro-api': 'http://127.0.0.1:7799',
+    },
+  },
 });

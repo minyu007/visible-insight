@@ -1,0 +1,1 @@
+import{_ as o}from"./index.501f0ba6.js";import{B as t,aD as _,aG as a,aL as c,be as s}from"./arco.2ed16239.js";const r={};function n(d,f){const e=s;return t(),_(e,{class:"footer"},{default:a(()=>[c("AMC Pro")]),_:1})}const x=o(r,[["render",n],["__scopeId","data-v-d0a611b5"]]);export{x as F};

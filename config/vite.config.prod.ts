@@ -25,6 +25,7 @@ export default mergeConfig(
         },
       },
       chunkSizeWarningLimit: 2000,
+      base: '/amcpro/',
     },
   },
   baseConfig

@@ -1,9 +1,9 @@
 import localeMessageBox from '@/components/message-box/locale/en-US';
 import localeLogin from '@/views/login/locale/en-US';
 
-import localeWorkplace from '@/views/dashboard/workplace/locale/en-US';
+import localeWorkplace from '@/views/replay/workplace/locale/en-US';
 
-import localeMonitor from '@/views/dashboard/monitor/locale/en-US';
+import localeMonitor from '@/views/replay/monitor/locale/en-US';
 
 import localeSearchTable from '@/views/list/search-table/locale/en-US';
 import localeCardList from '@/views/list/card/locale/en-US';
@@ -29,8 +29,8 @@ import localeUserSetting from '@/views/user/setting/locale/en-US';
 import localeSettings from './en-US/settings';
 
 export default {
-  'menu.dashboard': 'Dashboard',
-  'menu.server.dashboard': 'Dashboard-Server',
+  'menu.replay': 'Replay',
+  'menu.server.replay': 'replay-Server',
   'menu.server.workplace': 'Workplace-Server',
   'menu.server.monitor': 'Monitor-Server',
   'menu.list': 'List',
@@ -40,7 +40,7 @@ export default {
   'menu.profile': 'Profile',
   'menu.visualization': 'Data Visualization',
   'menu.user': 'User Center',
-  'menu.arcoWebsite': 'Visible Insight',
+  'menu.arcoWebsite': 'AMC Pro',
   'menu.faq': 'FAQ',
   'navbar.docs': 'Docs',
   'navbar.action.locale': 'Switch to English',

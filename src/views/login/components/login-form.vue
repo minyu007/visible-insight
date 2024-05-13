@@ -56,7 +56,10 @@
           {{ $t('login.form.login') }}
         </a-button>
         <a-button  long class="login-form-register-btn" type="outline">
-          SSO
+          <template #icon>
+            <icon-lock />
+          </template>
+          SSO Login
         </a-button>
       </a-space>
     </a-form>

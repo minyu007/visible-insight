@@ -40,7 +40,7 @@ setupMock({
       const units = [
         {
           name: '企业级产品设计系统',
-          description: 'Visible Insight System',
+          description: 'AMC Pro System',
         },
         {
           name: '火山引擎智能应用',
@@ -79,7 +79,7 @@ setupMock({
       return successResponseWrap(
         new Array(7).fill(null).map((_item, index) => ({
           id: index,
-          title: '发布了项目 Visible Insight System',
+          title: '发布了项目 AMC Pro System',
           description: '企业级产品设计系统',
           avatar:
             '//lf1-xgcdn-tos.pstatp.com/obj/vcloud/vadmin/start.8e0e4855ee346a46ccff8ff3e24db27b.png',

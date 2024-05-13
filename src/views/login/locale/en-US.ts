@@ -1,5 +1,5 @@
 export default {
-  'login.form.title': 'Login to Visible Insight',
+  'login.form.title': 'Login to AMC Pro',
   'login.form.userName.errMsg': 'Username cannot be empty',
   'login.form.password.errMsg': 'Password cannot be empty',
   'login.form.login.errMsg': 'Login error, refresh and try again',

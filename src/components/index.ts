@@ -8,6 +8,7 @@ import {
   LegendComponent,
   DataZoomComponent,
   GraphicComponent,
+  TitleComponent
 } from 'echarts/components';
 import Chart from './chart/index.vue';
 import Breadcrumb from './breadcrumb/index.vue';
@@ -25,6 +26,7 @@ use([
   LegendComponent,
   DataZoomComponent,
   GraphicComponent,
+  TitleComponent,
 ]);
 
 export default {
